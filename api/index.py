@@ -2,6 +2,7 @@
 # Scrape data from TeachAssist Login Credentials
 
 # Imports
+import chromedriver_autoinstaller
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -21,8 +22,9 @@ class Browser:
     browser, service = None, None
 
     # Initialize service and browser
-    def __init__(self, driver:str):
-        self.service = Service(driver)
+    def __init__(self):
+        chromedriver_autoinstaller.install()
+        self.service = Service(chromedriver_autoinstaller.get_chrome_driver_path())
         self.browser = webdriver.Chrome(service=self.service)
 
     # Open url
@@ -89,7 +91,7 @@ def login():
     username = request.form['username']
     password = request.form['password']
     
-    browser = Browser('chromedriver.exe')
+    browser = Browser()
     browser.open_page('https://ta.yrdsb.ca/yrdsb/')
     if browser.login_ta(username, password) == True:
         courses, marks = browser.scan_courses()
