@@ -11,10 +11,7 @@ import time
 from flask import Flask, request, jsonify
 from selenium.webdriver.chrome.options import Options
 
-
 # Debugging
-options = Options()
-options.headless = True
 app = Flask(__name__) 
 
 # Selenium Scraper
@@ -24,8 +21,13 @@ class Browser:
     # Initialize service and browser
     def __init__(self):
         chromedriver_autoinstaller.install()
+        options = Options()
+        options.headless = True
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--remote-debugging-port=9222')
         self.service = Service(chromedriver_autoinstaller.get_chrome_driver_path())
-        self.browser = webdriver.Chrome(service=self.service)
+        self.browser = webdriver.Chrome(service=self.service, options=options)
 
     # Open url
     def open_page(self, url: str):
@@ -110,5 +112,5 @@ def login():
 
     
 # Run 
-if __name__ == '__index__':
+if __name__ == '__main__':
     app.run(debug=False)

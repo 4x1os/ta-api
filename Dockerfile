@@ -17,7 +17,13 @@ RUN apt-get update && apt-get install -y \
     libx11-dev \
     libdbus-1-3 \
     libxtst6 \
-    chromium
+    chromium \
+    fonts-liberation \
+    libappindicator3-1 \
+    libasound2 \
+    libnspr4 \
+    libnss3 \
+    lsb-release
 
 # Set environment variables for Chrome
 ENV CHROME_BIN=/usr/bin/chromium
