@@ -108,5 +108,5 @@ def login():
 
     
 # Run 
-if __name__ == '__main__':
+if __name__ == '__index__':
     app.run(debug=False)

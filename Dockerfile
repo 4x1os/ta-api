@@ -24,4 +24,4 @@ ENV CHROME_BIN=/usr/bin/chromium
 ENV CHROME_DRIVER=/usr/bin/chromedriver
 
 # Run the scraper script
-CMD ["python", "scraper.py"]
+CMD ["python", "api/index.py"]
